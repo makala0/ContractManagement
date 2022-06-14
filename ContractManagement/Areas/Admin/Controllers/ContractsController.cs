@@ -13,7 +13,7 @@ using ContractManagement.Models.Identity;
 namespace ContractManagement.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Manager))]
+    [Authorize(Roles = nameof(Roles.Admin))]
     public class ContractsController : Controller
     {
         private readonly contractDbContext _context;
@@ -38,7 +38,7 @@ namespace ContractManagement.Areas.Admin.Controllers
 
             var contract = await _context.Contracts
                 .Include(o => o.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (contract == null)
             {
                 return NotFound();
@@ -50,16 +50,15 @@ namespace ContractManagement.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["InstitutionID"] = new SelectList(_context.Institutions, "ID", "ID");
 
             return View();
         }
 
-        
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Institution,ClosingDate,ValidityDate,EndDate,UserId")] Contract contract)
+        public async Task<IActionResult> Create([Bind("ID,RegistrationNumber,InstitutionID,DateTimeCreated,ClosedDate,ValidityDate,EndDate,UserId")] Contract contract)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +67,7 @@ namespace ContractManagement.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", contract.UserId);
+            ViewData["InstitutionID"] = new SelectList(_context.Contracts, "ID", "ID", contract.InstitutionID);
 
             return View(contract);
         }
@@ -94,7 +94,7 @@ namespace ContractManagement.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DateTimeCreated,OrderNumber,TotalPrice,UserId")] Contract contract)
         {
-            if (id != contract.Id)
+            if (id != contract.ID)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace ContractManagement.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(contract.Id))
+                    if (!OrderExists(contract.ID))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,7 @@ namespace ContractManagement.Areas.Admin.Controllers
 
             var order = await _context.Contracts
                 .Include(o => o.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (order == null)
             {
                 return NotFound();
@@ -153,7 +153,7 @@ namespace ContractManagement.Areas.Admin.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Contracts.Any(e => e.Id == id);
+            return _context.Contracts.Any(e => e.ID == id);
         }
     }
 }

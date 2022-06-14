@@ -34,14 +34,34 @@ namespace ContractManagement.Areas.Customer.Controllers
                 if (currentUser != null)
                 {
                     IList<Contract> userContracts = await this.contractDbContext.Contracts
-                                                                        .Where(or => or.Id == currentUser.Id)
+                                                                        .Where(or => or.UserId == currentUser.Id)
                                                                         .Include(o => o.User)
+                                                                        .Include(o => o.Institution)
+                                                                        .ThenInclude(o => o.Consultant)
                                                                         .ToListAsync();
                     return View(userContracts);
                 }
             }
 
             return NotFound();
+        }
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var consultant = await contractDbContext.Consultants
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (consultant == null)
+            {
+                return NotFound();
+            }
+
+            return View(consultant);
         }
     }
 }

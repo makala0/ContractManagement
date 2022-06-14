@@ -11,31 +11,40 @@
                     {
     <table style="width:100%" class="table table-responsive table-striped table-bordered">
         <tr>
-            <th class="col-sm-1">@nameof(Contract.Id)</th>
-            <th class="col-sm-2">@nameof(Contract.Institution)</th>
+            <th class="col-sm-1">Contract's ID</th>
+            <th class="col-sm-1">@nameof(Contract.RegistrationNumber)</th>
+            <th class="col-sm-4s">Consultant's name</th>
+            <th class="col-sm-3">Name of institution</th>
+            <th class="col-sm-3">@nameof(Contract.ClosedDate)</th>
             <th class="col-sm-3">@nameof(Contract.ValidityDate)</th>
             <th class="col-sm-3">@nameof(Contract.EndDate)</th>
-            <th class="col-sm-3">@nameof(Contract.ClosingDate)</th>
+            <th class="col-sm-4">Client</th>
         </tr>
         <tr>
-            <td class="col-sm-1">@item.Id</td>
-            <td class="col-sm-2">@item.Institution</td>
+            <td class="col-sm-1">@item.ID</td>
+            <td class="col-sm-1">@item.RegistrationNumber</td>
+            <td class="col-sm-4">
+                @item.Institution.Consultant.FirstName  @item.Institution.Consultant.LastName 
+                <a asp-action="Details" asp-route-id="@item.Institution.Consultant.ID"><img src="~/img/information.png"/></a>
+            </td>
+            <td class="col-sm-3">@item.Institution.Name</td>
+            <td class="col-sm-3">@item.ClosedDate</td>
             <td class="col-sm-3">@item.ValidityDate</td>
             <td class="col-sm-3">@item.EndDate</td>
-            <td class="col-sm-3">@item.ClosingDate</td>
+            <td class="col-sm-4">@item.User.FirstName @item.User.LastName (@item.User.UserName)</td>
         </tr>
 
 
     </table>
-                        
 
+                        
 <br />
 <br />
-<br /> }
-}
+<br /> 
+        }   
+    }
 else
 {
 <h2>Contracts are empty!</h2> 
-
+    } 
 }
-    }

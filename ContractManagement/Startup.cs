@@ -28,7 +28,9 @@ namespace ContractManagement
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<contractDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString")));
+            services.AddDbContext<contractDbContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             services.AddIdentity<User, Role>()
                     .AddEntityFrameworkStores<contractDbContext>()

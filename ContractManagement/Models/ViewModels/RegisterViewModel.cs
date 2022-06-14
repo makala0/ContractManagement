@@ -11,8 +11,10 @@ namespace ContractManagement.Models.ViewModels
         [Required]
         public string Username { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
 
         [Required]
@@ -21,6 +23,14 @@ namespace ContractManagement.Models.ViewModels
 
         [Phone]
         public string Phone { get; set; }
+
+        [Required]
+        public string BirthNumber { get; set; }
+
+        [Range(18, 99, ErrorMessage = "Enter age between 18-99.")]
+        [Required]
+        public int Age { get; set; }
+
 
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,}$", ErrorMessage = RegisterViewModel.ErrorMessagePassword)]

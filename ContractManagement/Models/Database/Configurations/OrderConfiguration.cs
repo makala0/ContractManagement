@@ -12,7 +12,7 @@ namespace ContractManagement.Models.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<Contract> builder)
         {
-            builder.Property(nameof(Contract.DateTimeCreated)).HasDefaultValueSql("NOW(6)");
+            builder.Property(nameof(Contract.DateTimeCreated)).HasDefaultValueSql("GETDATE()");
         }
     }
 }

@@ -12,23 +12,32 @@ namespace ContractManagement.Models.Entity
     public class Contract
     {
 
-        [Required]
         [Key]
-        public int Id { get; set; }
+        [Required]
+        public int ID { get; set; }
+
+        [Required]
+        public int RegistrationNumber { get; set; }
+
+        [ForeignKey("Institution")]
+        public int InstitutionID { get; set; }
+        public Institution Institution { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateTimeCreated { get; protected set; }
+
         [Required]
-        public string Institution { get; set; }
+        public DateTime ClosedDate  { get; set; } // datum uzavreni
+
         [Required]
-        public DateTime ClosingDate { get; set; }
+        public DateTime ValidityDate { get; set; } // datum platnosti
+
         [Required]
-        public DateTime ValidityDate { get; set; }
-        [Required]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; }  // datum ukonceni
+
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public User User { get; set; }
-        
 
     }
 }

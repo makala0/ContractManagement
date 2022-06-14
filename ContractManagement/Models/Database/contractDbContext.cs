@@ -13,8 +13,9 @@ namespace ContractManagement.Models.Database
 {
     public class contractDbContext : IdentityDbContext<User, Role, int>
     {
-        public DbSet<Spravce> Spravci { get; set; }
+        public DbSet<Consultant> Consultants { get; set; }
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Institution> Institutions { get; set; }
 
         public contractDbContext(DbContextOptions options) : base(options)
         {

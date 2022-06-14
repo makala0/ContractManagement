@@ -8,7 +8,6 @@ namespace ContractManagement.Models.Identity
     public enum Roles
     {
         Admin,
-        Manager,
         Customer
     }
 }

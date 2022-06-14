@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<ContractManagement.Models.Entity.Contract>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Index</h1>
 
@@ -13,62 +11,65 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DateTimeCreated)
+                @Html.DisplayNameFor(model => model.ID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Institution)
+                @Html.DisplayNameFor(model => model.Institution.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.ClosedDate)
             </th>
-            
             <th>
-                @Html.DisplayNameFor(model => model.ClosingDate)
+                @Html.DisplayNameFor(model => model.ValidityDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValidityDate)
+                @Html.DisplayNameFor(model => model.DateTimeCreated)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DateTimeCreated)
+                @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.RegistrationNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Institution)
+                @Html.DisplayFor(modelItem => item.Institution.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.ClosedDate)
             </td>
-            
             <td>
-                @Html.DisplayFor(modelItem => item.ClosingDate)
+                @Html.DisplayFor(modelItem => item.ValidityDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValidityDate)
+                @Html.DisplayFor(modelItem => item.DateTimeCreated)
             </td>
-
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
-        </tr>
-}
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>}
     </tbody>
 </table>

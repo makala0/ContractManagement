@@ -8,6 +8,6 @@ namespace ContractManagement.Models.ViewModels
 {
     public class IndexViewModel
     {
-        public IList<Spravce> Products { get; set; }
+        public IList<Consultant> Products { get; set; }
     }
 }

@@ -25,12 +25,15 @@ namespace ContractManagement
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<contractDbContext>();
                     DatabaseInit dbInit = new DatabaseInit();
-                    dbInit.Initialization(dbContext);
                     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
                     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                     await dbInit.EnsureRoleCreated(roleManager);
                     await dbInit.EnsureAdminCreated(userManager);
-                    await dbInit.EnsureManagerCreated(userManager);
+                    await dbInit.EnsureCustomer1Created(userManager);
+                    await dbInit.EnsureCustomer2Created(userManager);
+                    await dbInit.EnsureCustomer3Created(userManager);
+                    dbInit.Initialization(dbContext);
+                   
                 }
             }
 

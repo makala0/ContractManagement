@@ -22,35 +22,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                         @{
-                            @if (User.Identity.IsAuthenticated == true && (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.Manager.ToString())))
+                            @if (User.Identity.IsAuthenticated == true && (User.IsInRole(Roles.Admin.ToString())))
                             {
                                 
                               
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a class="nav-link text-light" asp-area="Admin" asp-controller="Contracts" asp-action="Index">Contracts</a>
-                                </li>
+                                </li>*@
                                
                             }
                             @if (User.Identity.IsAuthenticated == true && User.IsInRole(Roles.Admin.ToString()))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Users" asp-action="Index">User's accounts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Contracts" asp-action="Index">Contracts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Consultants" asp-action="Index">Consultants</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Users" asp-action="Clients">Clients</a>
                                 </li>
                             }
-                             @if (User.Identity.IsAuthenticated == true )
+                             @if (User.Identity.IsAuthenticated == true && !User.IsInRole(Roles.Admin.ToString()))
                             {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">My Contracts</a>
-                                    <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li class="nav-item">
-                                            <a class="nav-link text-light" asp-area="Customer" asp-controller="CustomerContracts" asp-action="Index">My Contracts</a>
-                                        </li>
-                                    </ul>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Customer" asp-controller="CustomerContracts" asp-action="Index">My Contracts</a>
                                 </li>
+                                    
                             }
                         }
                     </ul>

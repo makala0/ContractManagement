@@ -1,19 +1,36 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ContractManagement.Migrations
 {
-    public partial class MySql10 : Migration
+    public partial class sql10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Consultant",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(maxLength: 30, nullable: false),
+                    LastName = table.Column<string>(maxLength: 30, nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    BirthNumber = table.Column<string>(nullable: false),
+                    Age = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consultant", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -24,29 +41,11 @@ namespace ContractManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Spravce",
-                columns: table => new
-                {
-                    SpravceId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Jmeno = table.Column<string>(maxLength: 30, nullable: false),
-                    Prijmeni = table.Column<string>(maxLength: 30, nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    RodneCislo = table.Column<string>(maxLength: 11, nullable: false),
-                    Vek = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Spravce", x => x.SpravceId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -61,8 +60,11 @@ namespace ContractManagement.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    FirstName = table.Column<string>(maxLength: 30, nullable: false),
+                    LastName = table.Column<string>(maxLength: 30, nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    BirthNumber = table.Column<string>(nullable: false),
+                    Age = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,11 +72,31 @@ namespace ContractManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Institution",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false),
+                    ConsultantID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Institution", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Institution_Consultant_ConsultantID",
+                        column: x => x.ConsultantID,
+                        principalTable: "Consultant",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -91,35 +113,11 @@ namespace ContractManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contract",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DateTimeCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "NOW(6)"),
-                    Institution = table.Column<string>(nullable: false),
-                    ClosingDate = table.Column<DateTime>(nullable: false),
-                    ValidityDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contract", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Contract_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -199,10 +197,51 @@ namespace ContractManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Contract",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RegistrationNumber = table.Column<int>(nullable: false),
+                    InstitutionID = table.Column<int>(nullable: false),
+                    DateTimeCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    ClosedDate = table.Column<DateTime>(nullable: false),
+                    ValidityDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contract", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Contract_Institution_InstitutionID",
+                        column: x => x.InstitutionID,
+                        principalTable: "Institution",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Contract_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contract_InstitutionID",
+                table: "Contract",
+                column: "InstitutionID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Contract_UserId",
                 table: "Contract",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Institution_ConsultantID",
+                table: "Institution",
+                column: "ConsultantID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -213,7 +252,8 @@ namespace ContractManagement.Migrations
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -239,7 +279,8 @@ namespace ContractManagement.Migrations
                 name: "UserNameIndex",
                 table: "Users",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -249,9 +290,6 @@ namespace ContractManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "Spravce");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -266,10 +304,16 @@ namespace ContractManagement.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
+                name: "Institution");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Consultant");
         }
     }
 }
