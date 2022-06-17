@@ -8,7 +8,7 @@ using ContractManagement.Models.Entity;
 
 namespace ContractManagement.Models.Database.Configurations
 {
-    public class OrderConfiguration : IEntityTypeConfiguration<Contract>
+    public class ContractConfiguration : IEntityTypeConfiguration<Contract>
     {
         public void Configure(EntityTypeBuilder<Contract> builder)
         {

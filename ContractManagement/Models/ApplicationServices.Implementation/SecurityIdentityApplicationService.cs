@@ -60,7 +60,9 @@ namespace ContractManagement.Models.ApplicationServices.Implementation
                 FirstName = vm.FirstName,
                 LastName = vm.LastName,
                 Email = vm.Email,
-                PhoneNumber = vm.Phone
+                Phone = vm.Phone,
+                Age = vm.Age,
+                BirthNumber = vm.BirthNumber
             };
 
             string[] errors = null;

@@ -19,12 +19,15 @@ namespace ContractManagement.Models.Identity
         public string LastName { get; set; }
 
         [Required]
+        [EmailAddress]
+        public override string Email { get; set; }
+
+        [Required]
         [DataType(DataType.PhoneNumber)]
         [Phone]
         public string Phone { get; set; }
 
-        [Required]
-
+        [StringLength(12, ErrorMessage = "BirthNumber can have maximum of 12 characters")]
         public string BirthNumber { get; set; }
 
         [Required]

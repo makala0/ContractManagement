@@ -48,7 +48,6 @@ namespace ContractManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -62,8 +61,9 @@ namespace ContractManagement.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 30, nullable: false),
                     LastName = table.Column<string>(maxLength: 30, nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    BirthNumber = table.Column<string>(nullable: false),
+                    BirthNumber = table.Column<string>(maxLength: 12, nullable: true),
                     Age = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

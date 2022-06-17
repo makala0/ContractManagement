@@ -64,7 +64,7 @@ namespace ContractManagement.Areas.Security.Controllers
             {
                 bool isLogged = await security.Login(loginVM);
                 if (isLogged)
-                    return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace("Controller", String.Empty), new { area = String.Empty }); //;-)
+                    return RedirectToAction(nameof(HomeController.Welcome), nameof(HomeController).Replace("Controller", String.Empty), new { area = String.Empty }); 
 
                 loginVM.LoginFailed = true;
             }

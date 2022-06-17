@@ -26,7 +26,7 @@ namespace ContractManagement.Models.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration<Contract>(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration<Contract>(new ContractConfiguration());
 
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {

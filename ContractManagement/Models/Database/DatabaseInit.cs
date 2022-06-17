@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContractManagement.Models.Entity;
 using ContractManagement.Models.Identity;
+using System.Globalization;
 
 namespace ContractManagement.Models.Database
 {
@@ -116,7 +117,7 @@ namespace ContractManagement.Models.Database
             {
                 //ID = 2,
                 Name = "AEGON",
-                ConsultantID = 3
+                ConsultantID = 1
 
             };
 
@@ -132,14 +133,49 @@ namespace ContractManagement.Models.Database
             {
                 //ID = 4,
                 Name = "Kooperativa",
+                ConsultantID = 2
+
+            };
+
+            Institution i5 = new Institution()
+            {
+                //ID = 5,
+                Name = "UNIQA",
+                ConsultantID = 3
+
+            };
+
+            Institution i6 = new Institution()
+            {
+                //ID = 6,
+                Name = "Alianz",
+                ConsultantID = 3
+
+            };
+
+            Institution i7 = new Institution()
+            {
+                //ID = 7,
+                Name = "Generali",
                 ConsultantID = 4
 
             };
 
+            Institution i8 = new Institution()
+            {
+                //ID = 8,
+                Name = "Aviva",
+                ConsultantID = 4
+
+            };
             ins.Add(i1);
             ins.Add(i2);
             ins.Add(i3);
             ins.Add(i4);
+            ins.Add(i5);
+            ins.Add(i6);
+            ins.Add(i7);
+            ins.Add(i8);
 
             return ins;
         }
@@ -151,55 +187,121 @@ namespace ContractManagement.Models.Database
             Contract c1 = new Contract()
             {
                 //ID = 1,
-                RegistrationNumber = 1020,
-                InstitutionID = 3,
-                ClosedDate = DateTime.Now,
-                ValidityDate = DateTime.Now,
-                EndDate = DateTime.Now,
-                UserId = 4
+                RegistrationNumber = 1021,
+                InstitutionID = 1,
+                ClosedDate = DateTime.ParseExact("2013-04-11", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2013-01-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2014-04-23", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 2
             };
 
             Contract c2 = new Contract()
             {
                 //ID = 2,
-                RegistrationNumber = 1021,
+                RegistrationNumber = 1022,
                 InstitutionID = 2,
-                ClosedDate = DateTime.Now,
-                ValidityDate = DateTime.Now,
-                EndDate = DateTime.Now,
-                UserId = 3
+                ClosedDate = DateTime.ParseExact("2007-03-22", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2007-03-20", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2011-03-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 2
             };
 
             Contract c3 = new Contract()
             {
                 //ID = 3,
-                RegistrationNumber = 1022,
-                InstitutionID = 4,
-                ClosedDate = DateTime.Now,
-                ValidityDate = DateTime.Now,
-                EndDate = DateTime.Now,
+                RegistrationNumber = 1023,
+                InstitutionID = 3,
+                ClosedDate = DateTime.ParseExact("2011-05-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2011-03-07", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2015-09-09", "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 UserId = 2
             };
 
             Contract c4 = new Contract()
             {
                 //ID = 4,
-                RegistrationNumber = 2023,
-                InstitutionID = 1,
-                ClosedDate = DateTime.Now,
-                ValidityDate = DateTime.Now,
-                EndDate = DateTime.Now,
-                UserId = 4
+                RegistrationNumber = 1024,
+                InstitutionID = 4,
+                ClosedDate = DateTime.ParseExact("2017-02-11", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2017-02-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2022-12-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 3
             };
 
             Contract c5 = new Contract()
             {
                 //ID = 5,
-                RegistrationNumber = 2024,
-                InstitutionID = 3,
-                ClosedDate = DateTime.Now,
-                ValidityDate = DateTime.Now,
-                EndDate = DateTime.Now,
+                RegistrationNumber = 1025,
+                InstitutionID = 5,
+                ClosedDate = DateTime.ParseExact("2001-04-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2001-03-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2008-07-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 3
+            };
+
+            Contract c6 = new Contract()
+            {
+                //ID = 6,
+                RegistrationNumber = 1026,
+                InstitutionID = 6,
+                ClosedDate = DateTime.ParseExact("1996-06-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("1996-04-05", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2008-08-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 3
+            };
+
+            Contract c7 = new Contract()
+            {
+                //ID = 7,
+                RegistrationNumber = 1027,
+                InstitutionID = 7,
+                ClosedDate = DateTime.ParseExact("1999-05-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2001-08-26", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2012-07-11", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 4
+            };
+
+            Contract c8 = new Contract()
+            {
+                //ID = 8,
+                RegistrationNumber = 1028,
+                InstitutionID = 8,
+                ClosedDate = DateTime.ParseExact("2022-04-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2022-04-02", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2025-07-27", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 4
+            };
+
+            Contract c9 = new Contract()
+            { 
+                //ID = 9,
+                RegistrationNumber = 1029,
+                InstitutionID = 2,
+                ClosedDate = DateTime.ParseExact("2000-03-09", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2000-06-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2011-02-16", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 4
+            };
+
+            Contract c10 = new Contract()
+            {
+                //ID = 10,
+                RegistrationNumber = 1031,
+                InstitutionID = 4,
+                ClosedDate = DateTime.ParseExact("2004-04-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2004-04-01", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2008-01-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                UserId = 2
+            };
+
+            Contract c11 = new Contract()
+            {
+                //ID = 11,
+                RegistrationNumber = 2032,
+                InstitutionID = 5,
+                ClosedDate = DateTime.ParseExact("2017-11-07", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                ValidityDate = DateTime.ParseExact("2017-11-08", "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                EndDate = DateTime.ParseExact("2023-07-21", "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 UserId = 3
             };
 
@@ -208,8 +310,12 @@ namespace ContractManagement.Models.Database
             con.Add(c3);
             con.Add(c4);
             con.Add(c5);
-
-
+            con.Add(c6);
+            con.Add(c7);
+            con.Add(c8);
+            con.Add(c9);
+            con.Add(c10);
+            con.Add(c11);
 
             return con;
         }
@@ -276,8 +382,8 @@ namespace ContractManagement.Models.Database
                 UserName = "customer",
                 Email = "customer@customer.cz",
                 EmailConfirmed = true,
-                FirstName = "jmeno",
-                LastName = "prijmeni",
+                FirstName = "Marcel",
+                LastName = "Novotny",
                 BirthNumber = "2746389/1234",
                 Age = 25,
                 Phone = "235738467"

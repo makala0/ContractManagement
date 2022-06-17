@@ -21,10 +21,11 @@ namespace ContractManagement.Models.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required]
         [Phone]
         public string Phone { get; set; }
 
-        [Required]
+        [StringLength(11,ErrorMessage = "BirthNumber can have maximum of 11 characters")]
         public string BirthNumber { get; set; }
 
         [Range(18, 99, ErrorMessage = "Enter age between 18-99.")]
